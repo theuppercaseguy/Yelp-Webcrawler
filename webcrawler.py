@@ -1,8 +1,8 @@
 from os import system
-from openpyxl import Workbook
 import requests
 from bs4 import  BeautifulSoup
 import argparse
+from openpyxl import Workbook
 
 data= []
 
@@ -10,7 +10,6 @@ def yelp_spider(max_pages=0,URL=''):
    
    page = 0
    pages = []
-   system('cls')
    while page <= max_pages:
       pages.append(requests.get(URL + '&start='+str(page*10)))
       print('page: ',page+1,' scanned')
@@ -19,7 +18,6 @@ def yelp_spider(max_pages=0,URL=''):
    print('\n\n')
    page=0
    while page<=max_pages:
-      # url = 'https://www.yelp.com/search?find_desc=Restaurants&find_loc=Georgia%2C+VT%2C+United+States&start=' + str(page * 10)
       
       plain_text = pages[page].text     
       soup = BeautifulSoup(plain_text,'html.parser')#gets all the links and images and sorts them in the soup object
@@ -35,7 +33,7 @@ def yelp_spider(max_pages=0,URL=''):
          get_inside_data(href,title)
       
       page+=1
-      print('page: ',page,' Done')
+      print('page: ',page,' Done\n')
    
    
 def get_inside_data(item_url,title):
@@ -57,13 +55,11 @@ def get_inside_data(item_url,title):
       if 'Phone' in text:
          ph_no = text.replace('Phone number','')
          print('phone No: ',ph_no)
-         # break
 
       ##Shop addres
       if 'Get Directions' in text:
          location = text.replace('Get Directions','')
          print('location: ',location)
-         # break      
       
       ##website address
       soup2 = BeautifulSoup(str(divs),'html.parser')
@@ -74,24 +70,19 @@ def get_inside_data(item_url,title):
             print('website: ',website_addr)
             break
    
-   # system('cls')
    data.append([title,ph_no,location,website_addr])
-   # print('list: ',data)
-
-   print("\n#########################################\n")
+   
+   print("\n###################################################\n")
 
 
 if __name__ =='__main__':
-   
-   
-   
    parser = argparse.ArgumentParser()
    
-   parser.add_argument('-p',type=int,default='0',help=' is for how many pages you want to scrap,i.e: -p 2, will scan the firest 2 pages of a given link')
+   parser.add_argument('-u',type=str,help='(Required): Enter the URL of the searched Buisnessess to start parsing.',required=True)
    
-   parser.add_argument('-u',type=str,help='Enter the URL of the first page to start parsing from there.',required=True)
+   parser.add_argument('-p',type=int,default='1',help='(Optional): Is for how many pages you want to scrap (Default: 1),i.e: -p 2, will scan the firest 2 pages of a given link')
    
-   parser.add_argument('-o',type=str ,default='file',help='used to export an excell file with a given name',required=False)
+   parser.add_argument('-o',type=str ,default='file.xlsx',help='(Optional): Used to export the collected data to excell file.',required=False)
    
    args = parser.parse_args()
    
@@ -104,3 +95,6 @@ if __name__ =='__main__':
       for row in data:
          ws.append(row) # adds values to cells, each list is a new row.
       wb.save(args.o) # save to excel file.
+      print('Output produce as: ',args.o)
+      
+      print('\n\nby: The UPPERCASE GUY.\n\n')

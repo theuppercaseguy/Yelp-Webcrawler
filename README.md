@@ -22,7 +22,7 @@ usage: webcrawler.py [-h] [-p P] -u U [-o O]
 options:
   -h, --help  show this help message and exit.
   -u U        (Required): Enter the URL of the searched Buisnessess to start parsing.
-  -p P        (Optional): Is for how many pages you want to scrap,i.e: -p 2, will scan the firest 2 pages of a given link.
+  -p P        (Optional): Is for how many pages you want to scrap (Default: 1),i.e: -p 2, will scan the firest 2 pages of a given link.
   -o O        (Optional): Used to export the collected data to excell file.
 ```
 

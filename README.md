@@ -9,3 +9,17 @@ extracting all the data of restraunts in georgia,VT,UnitedStates.
 link: [https://www.yelp.com/search?find_desc=Restaurants&find_loc=Georgia%2C+VT%2C+United+States](url)
 
 
+```
+$python webcrawler.py -u 'https://www.yelp.com/search?find_desc=Restaurants&find_loc=Georgia%2C+VT%2C+United+States' -p 2 -o file.xlsx
+
+```
+
+
+# # # output:
+
+```
+
+page: 1 scanned
+page: 2 scanned
+
+```

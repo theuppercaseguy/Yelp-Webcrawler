@@ -6,12 +6,13 @@ from openpyxl import Workbook
 
 data= []
 
-def yelp_spider(max_pages=0,URL=''):
+def yelp_spider(max_pages=0,URL=""):
    
    page = 0
    pages = []
+   url = URL.replace('\n','')
    while page <= max_pages:
-      pages.append(requests.get(URL + '&start='+str(page*10)))
+      pages.append(requests.get(url + '&start='+str(page*10)))
       print('page: ',page+1,' scanned')
       page+=1
    
@@ -76,13 +77,14 @@ def get_inside_data(item_url,title):
 
 
 if __name__ =='__main__':
+   system('color 0b')
    parser = argparse.ArgumentParser()
    
    parser.add_argument('-u',type=str,help='(Required): Enter the URL of the searched Buisnessess to start parsing.',required=True)
    
    parser.add_argument('-p',type=int,default='1',help='(Optional): Is for how many pages you want to scrap (Default: 1),i.e: -p 2, will scan the firest 2 pages of a given link')
    
-   parser.add_argument('-o',type=str ,default='file.xlsx',help='(Optional): Used to export the collected data to excell file.',required=False)
+   parser.add_argument('-o',type=str ,help='(Optional): Used to export the collected data to excell file.',required=False)
    
    args = parser.parse_args()
    
@@ -97,4 +99,4 @@ if __name__ =='__main__':
       wb.save(args.o) # save to excel file.
       print('Output produce as: ',args.o)
       
-      print('\n\nby: The UPPERCASE GUY.\n\n')
+   print('\n\nby: The UPPERCASE GUY.\n\n')

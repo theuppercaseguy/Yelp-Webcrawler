@@ -34,9 +34,11 @@ Link: [https://www.yelp.com/search?find_desc=Restaurants&find_loc=Georgia%2C+VT%
 
 
 ```
-$python webcrawler.py -u 'https://www.yelp.com/search?find_desc=Restaurants&find_loc=Georgia%2C+VT%2C+United+States' -p 2 -o file.xlsx
+$python webcrawler.py -u "https://www.yelp.com/search?find_desc=Restaurants&find_loc=Georgia%2C+VT%2C+United+States" -p 2 -o file.xlsx
 
 ```
+**link must be in: " [link] "**
+
 
 
 ### OutPut:
